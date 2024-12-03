@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo de Xadrez</title>
     <style>
+        /* Reset básico para o corpo */
         body {
             display: flex;
             justify-content: center;
@@ -12,15 +13,18 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
         }
 
+        /* Estilo do tabuleiro */
         #tabuleiro {
             display: grid;
             grid-template-columns: repeat(8, 50px);
             grid-template-rows: repeat(8, 50px);
-            gap: 0;
+            border: 2px solid #000;
         }
 
+        /* Estilo das casas */
         .casa {
             width: 50px;
             height: 50px;
@@ -31,6 +35,7 @@
             cursor: pointer;
         }
 
+        /* Casas claras e escuras */
         .clara {
             background-color: #f0d9b5;
         }
@@ -39,14 +44,18 @@
             background-color: #b58863;
         }
 
+        /* Destaque para a casa selecionada */
         .selecionada {
             border: 2px solid #ff0000;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
+    <!-- Tabuleiro -->
     <div id="tabuleiro"></div>
 
+    <!-- Script externo -->
     <script src="script.js"></script>
 </body>
 </html>
