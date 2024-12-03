@@ -2,22 +2,33 @@
     display: grid;
     grid-template-columns: repeat(8, 50px);
     grid-template-rows: repeat(8, 50px);
+    border: 2px solid black; /* Define uma borda ao redor do tabuleiro */
+    margin: 0 auto; /* Centraliza o tabuleiro horizontalmente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona um leve efeito de sombra */
 }
 
 .casa {
     width: 50px;
     height: 50px;
-    border: 1px solid black;
+    border: 1px solid black; /* Bordas para cada casa */
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 24px;
+    box-sizing: border-box; /* Garante que o padding e a borda não alterem o tamanho */
+    cursor: pointer; /* Indica que a casa pode ser clicada */
+    transition: transform 0.2s; /* Adiciona uma leve animação ao interagir */
+}
+
+.casa:hover {
+    transform: scale(1.1); /* Aumenta o tamanho da casa ao passar o mouse */
+    z-index: 1; /* Garante que a casa fique acima das outras ao interagir */
 }
 
 .clara {
-    background-color: #f0d9b5;
+    background-color: #f0d9b5; /* Cor das casas claras */
 }
 
 .escura {
-    background-color: #b58863;
+    background-color: #b58863; /* Cor das casas escuras */
 }
