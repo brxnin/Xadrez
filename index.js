@@ -9,8 +9,8 @@ class Tabuleiro {
                 this.tabuleiro[linha][coluna] = new Casa(linha, coluna);
             }
         }
-        console.log(this.tabuleiro);
 
+        console.log(this.tabuleiro);
         this.selecionada = null;
     }
 
@@ -21,12 +21,20 @@ class Tabuleiro {
     }
 
     clicarCasa(casa) {
-        if (this.selecionada && this.selecionada.peca) {
-            const peca = this.selecionada.peca;
-            casa.setPeca(peca);
-            this.selecionada.setPeca(null);
-            this.selecionada = null;
-        }else if (casa.peca) {
+        if (this.selecionada) {
+            // Se já há uma peça selecionada
+            const pecaSelecionada = this.selecionada.peca;
+            // Se a casa clicada não tem uma peça, ou tem uma peça do adversário, movemos a peça
+            if (!casa.peca || casa.peca.cor !== pecaSelecionada.cor) {
+                casa.setPeca(pecaSelecionada);  // Coloca a peça na nova casa
+                this.selecionada.setPeca(null); // Remove a peça da casa anterior
+                this.selecionada = null;        // Desmarcar a peça selecionada
+            } else {
+                // Se a casa já tem uma peça da mesma cor, desmarcamos a seleção
+                this.selecionada = null;
+            }
+        } else if (casa.peca) {
+            // Se não houver uma peça selecionada, seleciona a peça da casa clicada
             this.selecionada = casa;
         }
     }
@@ -50,12 +58,12 @@ class Casa {
 
         this.elementoHtml.addEventListener('click', () => {
             tabuleiro.clicarCasa(this);
-        })
+        });
     }
 
     setPeca(peca) {
         this.peca = peca;
-        this.elementoHtml.innerHTML = peca ? peca.simbolo : '';
+        this.elementoHtml.innerHTML = peca ? peca.simbolo : '';  // Atualiza a casa com o símbolo da peça
     }
 }
 
@@ -128,9 +136,6 @@ const pecasBrancas = [
     new Torre('branca', 0, 0), new Torre('branca', 0, 7), new Cavalo('branca', 0, 1), new Cavalo('branca', 0, 6),
     new Bispo('branca', 0, 2), new Bispo('branca', 0, 5), new Rainha('branca', 0, 3), new Rei('branca', 0, 4)
 ];
-
-peao1 = new Peao('preta', 6, 0);
-tabuleiro.colocarPeca(peao1,6,0);
 
 // Peças Pretas
 const pecasPretas = [
